@@ -1,0 +1,29 @@
+﻿@inherits UmbracoViewPage<MandMOnTheRoad.Models.TimeLineItem>
+@{	Layout = null; }
+
+@if (Model.Type.ToLower() != "photo" || string.IsNullOrWhiteSpace(Model.YoutubeVideoCode))
+{
+<div class="cd-timeline-block">
+    <div class="cd-timeline-img @Model.ColorClass">
+        <img src="@Model.Icon" alt="Picture">
+    </div> <!-- cd-timeline-img -->
+    <div class="cd-timeline-content">
+        <h2>@Model.Title</h2>
+        @if (Model.Type.ToLower() == "photo")
+        {
+            <a href="@Model.Image.Url" class="cd-timeline-lightwindow-img">
+                <img src="@Model.Image.Url?width=480" border="0" />
+            </a>
+        }
+        else
+        {
+            <div class="video-container">
+                <iframe src="@string.Format("https://www.youtube.com/embed/{0}", @Model.YoutubeVideoCode)" frameborder="0" allowfullscreen></iframe>
+            </div>
+        }
+        
+
+        <span class="cd-date">@Model.CreateDate.ToString("dd MMMM yyyy")</span>
+	</div> <!-- cd-timeline-content -->
+</div> 
+}

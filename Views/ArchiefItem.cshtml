@@ -1,0 +1,26 @@
+﻿@inherits UmbracoViewPage<MandMOnTheRoad.Models.ArchiveItemPage>
+@{
+    Layout = "_Layout.cshtml";
+}
+<section class="archive-item-header">
+    <h2>@Model.PageTitle</h2>
+</section>
+
+<section id="travel-chart" class="chart-container"></section>
+
+<section id="cd-timeline" class="cd-container">
+    @if (Model.TimeLine != null)
+    {
+        foreach (var item in Model.TimeLine.Items.OrderByDescending(x => x.CreateDate))
+        {
+            Html.RenderPartial("TimelineItem", item);
+        }
+    }
+</section>
+
+<script>
+    @Html.Raw(Model.Map != null ? Model.Map.GetGoogleCoordinates("locations") : "var locations = [];")
+</script>
+<script src="/assets/js/chart.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARpD2uV2bLLIi27rggg9jB0fFG0wmtIj0&callback=initialize"></script>
+

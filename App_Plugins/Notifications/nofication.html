@@ -1,0 +1,23 @@
+﻿<div ng-controller="MandMOnTheRoad.NotificationController">
+
+    <div class="umb-pane">
+        <h5>Send push notification to App</h5>
+        <div class="row">
+            Do you want to send a push notification message to the app for item:  '{{Name}}'?<br />
+        </div>
+        <div class="row">
+            <label>Title</label><br />
+            <input type="text" ng-model="title" />
+        </div>
+        <div class="row">
+            <label>Message</label><br />
+            <textarea ng-model="message" />
+        </div>
+    </div>
+
+    <div class="umb-dialog-footer btn-toolbar umb-btn-toolbar">
+        <button class="btn btn-primary" ng-click="pushNotification()" ng-disabled="busy">
+            Send Notification
+        </button>
+    </div>
+</div>

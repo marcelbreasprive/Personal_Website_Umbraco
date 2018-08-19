@@ -1,0 +1,33 @@
+﻿#cd-timeline {
+    margin-top: 1em;
+}
+
+.chart-container {
+  /* this class is used to give a max-width to the element it is applied to, and center it horizontally when it reaches that max-width */
+  width: 90%;
+  max-width: 1170px;
+  margin: 3em auto 0 auto;
+  height: 300px;
+}
+
+    .chart-container.app {
+        height: 100vh;
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+    }
+
+    .chart-container.mappage {
+        height: 800px;
+        width: 100%;
+        max-width: 1170px;
+        max-height: 800px;
+        margin-bottom: 3em;
+		overflow: visible;
+    }
+
+.infowindow {
+    line-height: 1.35;
+    overflow: hidden;
+    white-space: nowrap;
+}

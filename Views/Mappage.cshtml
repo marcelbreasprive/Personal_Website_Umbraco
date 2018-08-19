@@ -1,0 +1,12 @@
+﻿@inherits UmbracoViewPage<MandMOnTheRoad.Models.Mappage>
+@{
+    Layout = "_Layout.cshtml";
+}
+
+<section id="travel-chart" class="chart-container @(Model.IsApp ? "app" : "mappage" )"></section>
+
+<script>
+    @Html.Raw(Model.Map != null ? Model.Map.GetGoogleCoordinates("locations") : "var locations = [];")
+</script>
+<script src="/assets/js/chart.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARpD2uV2bLLIi27rggg9jB0fFG0wmtIj0&callback=initialize"></script>

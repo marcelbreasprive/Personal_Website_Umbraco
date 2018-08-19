@@ -1,0 +1,10 @@
+﻿@inherits UmbracoViewPage<MandMOnTheRoad.Models.BasePage>
+@{	Layout = null; }
+
+<div class="topnav" id="myTopnav">
+@foreach (var item in Model.DescendantsOrSelf<MandMOnTheRoad.Models.BasePage>().Where(x=> x.Level <= 2))
+{
+    <a href="@item.Url">@(string.IsNullOrWhiteSpace(item.MenuText) ? item.Name : item.MenuText)</a>
+}
+    <a href="javascript:void(0);" style="font-size:20px;" class="icon" onclick="setMenu()">&#9776;</a>
+</div>

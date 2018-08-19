@@ -1,0 +1,58 @@
+﻿@using Our.Umbraco.Ditto
+@inherits UmbracoViewPage<MandMOnTheRoad.Models.BasePage>
+@{
+    Layout = null;
+    var title = Model.PageTitle;
+    string banner = string.Empty;
+    string bannerurl = string.Empty;
+    IPublishedContent bannerObj = null;
+    var homepage = Model.AncestorOrSelf("homepage");
+    if (homepage != null)
+    {
+        title = homepage.As<MandMOnTheRoad.Models.Homepage>().PageTitle;
+        bannerObj = homepage.As<MandMOnTheRoad.Models.Homepage>().PageBanner;
+    }
+
+    if (bannerObj != null)
+    {
+        bannerurl = String.Format("{0}{1}", Request.Url.GetLeftPart(UriPartial.Authority), bannerObj.Url);
+        banner = string.Format("style=\"background-image: url('{0}');\"", bannerObj.Url);
+    }
+}
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='http://fonts.googleapis.com/css?family=Droid+Serif|Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/assets/css/reset.css"> <!-- CSS reset -->
+    <link rel="stylesheet" href="/assets/css/menu.css"> <!-- Resource style -->
+    <link rel="stylesheet" href="/assets/css/style.css"> <!-- Resource style -->
+    <link rel="stylesheet" href="/assets/css/chart.css"> <!-- Resource style -->
+    <link rel="stylesheet" href="/assets/css/magnific-popup.css"> <!-- Resource style -->
+    <script src="/assets/js/modernizr.js"></script> <!-- Modernizr -->
+    @if (!String.IsNullOrWhiteSpace(bannerurl))
+    {
+        <meta name="og:image" property="og:image" content="@bannerurl" />
+    }
+    @if (!String.IsNullOrWhiteSpace(Model.MetaDescription))
+    {
+        <meta name="Description" property="Description" content="@Model.MetaDescription" />
+    }
+    <title>@(String.IsNullOrWhiteSpace(Model.MetaTitle) ? title : string.Format("{0} - {1}", title, Model.MetaTitle))</title>
+</head>
+<body>
+    @if (!Model.IsApp)
+    {
+        <header @Html.Raw(banner)>
+            <h1>@title</h1>
+        </header>
+        Html.RenderPartial("Menu", homepage);
+    }
+    @RenderBody()
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="/assets/js/main.js"></script>
+</body>
+</html>

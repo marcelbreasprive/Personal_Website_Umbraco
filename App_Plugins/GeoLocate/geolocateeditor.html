@@ -1,0 +1,49 @@
+﻿<div ng-controller="Macel.Breas.GeoLocateController">
+    <div class="GeoLocate-Search">
+        Current location: <i><span ng-bind="model.value.Location"></span></i>.<br />
+        <input type="text" ng-model="search" placeholder="Type location youre here" /> <input type="button" value="Search" ng-click="findLocations()" style="padding:3px;" />
+        <div>
+            <br />
+        </div>
+        <div>
+            <div class="GeoLocate-Result" ng-repeat="location in foundlocations track by $index" ng-click="setLocation(location)">
+                <strong>{{ location.formatted_address }}</strong><br />
+                Location: {{ location.geometry.location.lat | number : 6 }}, {{ location.geometry.location.lng | number : 6 }}
+            </div>
+            <span ng-show="foundlocations.length == 0 && searched"><i>No results found...</i></span>
+        </div>
+    </div>
+    <div class="GeoLocate-Location">
+        <img src="https://maps.googleapis.com/maps/api/staticmap?center={{model.value.Latitude}},{{model.value.Longitude}}&size=300x300&zoom=10" border="0"/>
+    </div>
+    <div style="clear:both;"></div>
+</div>
+<style type="text/css">
+    .GeoLocate-Search, .GeoLocate-Location {
+        width: 40%;
+        float: left;
+    }
+
+    .GeoLocate-Result {
+        border-left: 10px solid #1c64d1;
+        padding-left: 5px;
+        margin-bottom: 2px;
+        cursor: pointer;        
+    }
+
+    .GeoLocate-Location img {
+        
+        border: 1px solid #ccc;
+        transition: border linear .2s,box-shadow linear .2s;
+    }
+
+
+    @media only screen and (max-width: 600px) {
+        .GeoLocate-Search, .GeoLocate-Location {
+            width: 100%;
+            float: none;
+        }
+    }
+
+
+</style>

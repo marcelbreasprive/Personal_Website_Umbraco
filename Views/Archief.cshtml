@@ -1,0 +1,29 @@
+﻿@using Our.Umbraco.Ditto
+@inherits UmbracoViewPage<MandMOnTheRoad.Models.ArchiefPage>
+@{
+    Layout = "_Layout.cshtml";
+    var items = Model.Children.Select(x => x.As<MandMOnTheRoad.Models.ArchiveItemPage>()).ToList();
+}
+
+<section class="archive-container">
+@foreach (var item in items)
+{
+    if (item.ThumbnailImage != null)
+    {
+        <a href="@item.Url">
+
+            <div class="archive-item-container">
+                <div class="archive-image-container" style="background-image: url('@(item.ThumbnailImage.Url)?height=150&width=150&mode=crop')"></div>
+                <div class="archive-image-container right" style="background-image: url('@(item.ThumbnailImage.Url)?height=150&width=150&mode=crop')"></div>
+
+                <h5>
+                    @item.PageTitle
+                </h5>
+
+                <div class="clear"></div>
+            </div>
+        </a>
+    }
+}
+
+</section>
